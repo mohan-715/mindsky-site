@@ -47,31 +47,28 @@ function renderHome(){
       <div class="galaxy-reveal" id="galaxyReveal">
         <div class="reveal-title"><div class="eyebrow">SUBJECTS</div><h2>Pick a subject</h2><p>Each star is a topic.</p></div>
         <div class="constellation-systems">
-          <div class="reveal-link" style="width:240px;left:23%;top:56%;transform:rotate(-30deg)"></div>
-          <div class="reveal-link" style="width:240px;left:43%;top:40%;transform:rotate(30deg)"></div>
-          <div class="reveal-link" style="width:240px;left:65%;top:57%;transform:rotate(-30deg)"></div>
-          <div class="reveal-system rs1" style="left:17%;top:60%;--c:var(--physics)" onclick="enterSystem('physics')" tabindex="0">
+          <div class="reveal-system rs1" style="left:12.5%;top:64%;--c:var(--physics)" onclick="enterSystem('physics')" tabindex="0">
             <div class="outer"></div><div class="orbit"></div><div class="sun">Physics</div>
             <div class="p" style="--r:72px;--dur:5s;--angle:25deg" data-label="Gravity"></div>
             <div class="p" style="--r:92px;--dur:7s;--angle:170deg" data-label="Force"></div>
             <div class="p" style="--r:55px;--dur:4s;--angle:260deg" data-label="Electronics"></div>
             <div class="system-name">PHYSICS</div>
           </div>
-          <div class="reveal-system rs2" style="left:39%;top:34%;--c:var(--math)" onclick="enterSystem('mathematics')" tabindex="0">
+          <div class="reveal-system rs2" style="left:37.5%;top:32%;--c:var(--math)" onclick="enterSystem('mathematics')" tabindex="0">
             <div class="outer"></div><div class="orbit"></div><div class="sun">Math</div>
             <div class="p" style="--r:70px;--dur:5.5s;--angle:70deg" data-label="Algebra"></div>
             <div class="p" style="--r:90px;--dur:8s;--angle:210deg" data-label="Geometry"></div>
             <div class="p" style="--r:52px;--dur:4.4s;--angle:320deg" data-label="Patterns"></div>
             <div class="system-name">MATHEMATICS</div>
           </div>
-          <div class="reveal-system rs3" style="left:61%;top:62%;--c:var(--chemistry)" onclick="enterSystem('chemistry')" tabindex="0">
+          <div class="reveal-system rs3" style="left:62.5%;top:64%;--c:var(--chemistry)" onclick="enterSystem('chemistry')" tabindex="0">
             <div class="outer"></div><div class="orbit"></div><div class="sun">Chem</div>
             <div class="p" style="--r:68px;--dur:5.2s;--angle:40deg" data-label="Atoms"></div>
             <div class="p" style="--r:92px;--dur:7.5s;--angle:160deg" data-label="Reactions"></div>
             <div class="p" style="--r:52px;--dur:4.2s;--angle:280deg" data-label="Bonds"></div>
             <div class="system-name">CHEMISTRY</div>
           </div>
-          <div class="reveal-system rs4" style="left:83%;top:36%;--c:var(--india)" onclick="enterSystem('india')" tabindex="0">
+          <div class="reveal-system rs4" style="left:87.5%;top:32%;--c:var(--india)" onclick="enterSystem('india')" tabindex="0">
             <div class="outer"></div><div class="orbit"></div><div class="sun">India</div>
             <div class="p" style="--r:67px;--dur:6.5s;--angle:110deg" data-label="Geography"></div>
             <div class="p" style="--r:94px;--dur:9s;--angle:230deg" data-label="History"></div>
@@ -110,12 +107,32 @@ function initGalaxyParticles(){
 function diveIntoGalaxy(){
   const galaxy=document.getElementById('mindskyGalaxy'), dive=document.getElementById('blackholeDive'), reveal=document.getElementById('galaxyReveal');
   if(!galaxy || !dive || !reveal) return;
+  fitGalaxy();
   galaxy.classList.add('dive-ready'); dive.classList.add('active');
   const core=document.getElementById('galaxyCore');
   core.style.transform='translate(-50%,-50%) scale(.04)'; core.style.filter='blur(10px)';
   setTimeout(()=>{ reveal.classList.add('show'); galaxy.querySelectorAll('.galaxy-ui,.galaxy-orbit,.galaxy-core').forEach(el=>el.style.opacity='0'); dive.classList.remove('active'); },900);
 }
 
+function fitGalaxy(){
+  const box=document.querySelector('.constellation-systems'); if(!box) return;
+  box.style.maxHeight="";
+  const gal=document.getElementById('mindskyGalaxy');
+  if(gal){ const room=window.innerHeight-(gal.getBoundingClientRect().top+box.offsetTop)-10; if(room>200) box.style.maxHeight=room+"px"; }
+  const cw=box.clientWidth, ch=box.clientHeight; if(!cw||!ch) return;
+  let tops, s;
+  if(cw<700){ tops=[24,30,66,72]; box.dataset.layout='phone';
+    s=Math.min(0.46*cw*0.92/225, 0.24*ch/116, (0.28*ch-26)/112);
+    const cols=[27,73,27,73]; box.querySelectorAll('.reveal-system').forEach((el,i)=>{ el.style.left=cols[i]+'%'; el.style.top=tops[i]+'%'; });
+  } else { box.dataset.layout='wide';
+    s=Math.min(0.25*cw*0.94/225, 0.30*ch/116, (0.34*ch-26)/112);
+    const pos=[[12.5,64],[37.5,32],[62.5,64],[87.5,32]]; box.querySelectorAll('.reveal-system').forEach((el,i)=>{ el.style.left=pos[i][0]+'%'; el.style.top=pos[i][1]+'%'; });
+  }
+  s=Math.max(0.4,Math.min(1,s));
+  box.style.setProperty('--gs',s.toFixed(3));
+  box.querySelectorAll('.reveal-system').forEach(el=>el.style.setProperty('--gs',s.toFixed(3)));
+}
+window.addEventListener('resize',function(){ fitGalaxy(); });
 function resetGalaxyView(){
   const galaxy=document.getElementById('mindskyGalaxy'), dive=document.getElementById('blackholeDive'), reveal=document.getElementById('galaxyReveal');
   if(!galaxy || !dive || !reveal) return;

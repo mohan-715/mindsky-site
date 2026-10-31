@@ -190,7 +190,7 @@ function renderLessons(){
     }
     const mpHtml=`<div class="mind-picture"><div class="mp-label">PICTURE IN YOUR MIND</div><div class="mp-chain">${l.mentalPicture.map((step,i)=>(i>0?'<div class="mp-arrow">↓</div>':'')+`<div class="mp-step">${step}</div>`).join("")}</div></div>`;
     const quizHtml=`<div class="quiz" data-lesson="${l.id}"><h3 class="section-title">Can You Predict It?</h3>${l.quiz.map(q=>`<div class="quiz-q"><div class="qtext">${q.q}</div>${q.options.map(o=>`<button class="qopt" data-correct="${!!o.c}">${o.t}</button>`).join("")}<div class="qfeedback"></div>${q.why?`<div class="qwhy" hidden>${q.why}</div>`:""}</div>`).join("")}<div class="quiz-result" hidden></div></div>`;
-    section.innerHTML=`<div class="chapter">${l.chapter}</div><h2>${l.title}</h2><div class="story">${l.hook}</div>${sectionsHtml}${simHtml}${galleryHtml}${mpHtml}${quizHtml}<button class="complete" onclick="completeTopic('${l.id}')">Discover This Star</button>`;
+    section.innerHTML=`<div class="chapter">${l.chapter}</div><h2>${l.title}</h2><div class="story">${l.hook}</div>${sectionsHtml}${simHtml}${galleryHtml}${mpHtml}${quizHtml}<button class="complete" onclick="completeTopic('${l.id}');setTimeout(closeLesson,900)">Discover This Star</button>`;
     lessonsRoot.appendChild(section);
   });
   attachQuizHandlers();
@@ -291,6 +291,7 @@ function openLesson(id){
   benchRelease();
   const el=document.getElementById("lesson-"+id);
   if(!el) return;
+  document.querySelectorAll("#lessons > section").forEach(o=>{ if(o!==el) o.style.display="none"; });
   el.style.display="block";
   setTimeout(()=>window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.scrollY - 70), behavior:"smooth" }),50);
   if(!el.dataset.simStarted){

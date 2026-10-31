@@ -44,5 +44,4 @@ Then open http://localhost:8000 in a browser.
 
 ## License
 
-Copyright © 2026 Mohan.
-All rights reserved.
+Copyright © 2026 Mohan. All rights reserved.

@@ -44,8 +44,11 @@ function routerSync(){
 })();
 
 function addCopyLinkButton(id){
-  const sec=document.getElementById("lesson-"+id); if(!sec || sec.querySelector(".copy-link")) return;
+  const sec=document.getElementById("lesson-"+id); if(!sec || sec.querySelector(".lesson-actions")) return;
   const chap=sec.querySelector(".chapter"); if(!chap) return;
+  const bar=document.createElement("div"); bar.className="lesson-actions";
+  const back=document.createElement("button"); back.type="button"; back.className="back-to-map"; back.textContent="← Back to the map";
+  back.onclick=closeLesson;
   const b=document.createElement("button"); b.type="button"; b.className="copy-link"; b.textContent="Copy link to this topic";
   b.onclick=function(){
     const url=location.href.split("#")[0]+"#/"+(lessonById(id)||{}).subject+"/"+id;
@@ -53,8 +56,19 @@ function addCopyLinkButton(id){
     if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done,function(){ window.prompt("Copy this link:",url); });
     else window.prompt("Copy this link:",url);
   };
-  chap.insertAdjacentElement("afterend",b);
+  bar.appendChild(back); bar.appendChild(b);
+  chap.insertAdjacentElement("afterend",bar);
 }
+function closeLesson(){
+  document.querySelectorAll("#lessons > section").forEach(o=>{ o.style.display="none"; });
+  ROUTER.lesson=null; routerSync();
+  const at=document.getElementById("atlas"); if(at) window.scrollTo({ top:Math.max(0,at.getBoundingClientRect().top+window.scrollY-90), behavior:"smooth" });
+}
+/* the galaxy picker is re-fitted whenever the home view is drawn */
+(function(){
+  const _renderHome=renderHome;
+  renderHome=function(){ _renderHome(); requestAnimationFrame(function(){ fitGalaxy(); }); };
+})();
 
 function routerParse(hash){
   const parts=(hash||"").replace(/^#\/?/,"").split("/").filter(Boolean).map(decodeURIComponent);
@@ -90,3 +104,4 @@ function routerApply(){
 }
 window.addEventListener("hashchange",routerApply);
 routerApply();
+document.body.classList.toggle('immersive-home', APP.view==='home');
