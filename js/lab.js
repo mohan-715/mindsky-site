@@ -1,5 +1,13 @@
 /* ---------- LAB BENCH: lesson experiments run as free-play tools ---------- */
 const BENCH=[
+  {group:'phys',lesson:'projectile',which:'sim',tab:'Projectile'},
+  {group:'phys',lesson:'momentum',which:'sim',tab:'Collisions'},
+  {group:'phys',lesson:'waves',which:'sim',tab:'Wave Maker'},
+  {group:'phys',lesson:'light',which:'sim',tab:'Refraction'},
+  {group:'phys',lesson:'lenses',which:'sim',tab:'Lens'},
+  {group:'phys',lesson:'heat',which:'sim',tab:'Heating'},
+  {group:'phys',lesson:'pressure',which:'sim',tab:'Pressure'},
+  {group:'phys',lesson:'magnetism',which:'sim',tab:'Electromagnet'},
   {group:'chem',lesson:'gas-laws',which:'sim',tab:'Gas in a Piston'},
   {group:'chem',lesson:'gas-laws',which:'gallery',tab:'Pressure vs Volume'},
   {group:'chem',lesson:'acids-bases',which:'gallery',tab:'Titration'},

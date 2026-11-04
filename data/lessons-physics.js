@@ -3,7 +3,7 @@ LESSONS.push(
   {
     id:"gravity",
     subject:"physics",
-    pos:{ top:100, left:"45%" },
+    pos:{ top:50, left:"50%" },
     label:"Gravity",
     chapter:"ATLAS ENTRY 01 • THE FALLING WORLDS",
     title:"Gravity",
@@ -39,7 +39,7 @@ LESSONS.push(
   {
     id:"motion",
     subject:"physics",
-    pos:{ top:280, left:"20%" },
+    pos:{ top:170, left:"22%" },
     label:"Motion",
     chapter:"ATLAS ENTRY 02 • THE PATH OF MOVING WORLDS",
     title:"Motion",
@@ -71,7 +71,7 @@ LESSONS.push(
   {
     id:"forces",
     subject:"physics",
-    pos:{ top:320, left:"65%" },
+    pos:{ top:170, left:"78%" },
     label:"Forces",
     chapter:"ATLAS ENTRY 03 • THE INVISIBLE HANDS",
     title:"Forces & Newton's Laws",
@@ -116,7 +116,7 @@ LESSONS.push(
   {
     id:"energy",
     subject:"physics",
-    pos:{ top:130, left:"15%" },
+    pos:{ top:290, left:"50%" },
     label:"Energy",
     chapter:"ATLAS ENTRY 04 • THE HIDDEN CURRENCY",
     title:"Work, Energy &amp; Power",
@@ -165,7 +165,7 @@ LESSONS.push(
   {
     id:"electricity",
     subject:"physics",
-    pos:{ top:420, left:"45%" },
+    pos:{ top:1070, left:"38%" },
     label:"Electricity",
     chapter:"ATLAS ENTRY 05 • THE INVISIBLE RIVER",
     title:"Electricity",
@@ -212,7 +212,7 @@ LESSONS.push(
   {
     id:"electronics",
     subject:"physics",
-    pos:{ top:170, left:"70%" },
+    pos:{ top:1100, left:"72%" },
     label:"Electronics",
     isHub:true,
     chapter:"ATLAS ENTRY 06 • THE BUILDING BLOCKS OF CIRCUITS",

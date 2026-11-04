@@ -1,0 +1,534 @@
+/* MindSky lessons: physics, part 2 */
+LESSONS.push(
+  {
+    id:"projectile",
+    subject:"physics",
+    pos:{ top:410, left:"22%" },
+    label:"Projectile Motion",
+    chapter:"ATLAS ENTRY 12 • THE ARC OF A THROWN WORLD • GRADES 9–11",
+    title:"Projectile Motion",
+    hook:"A footballer chips the ball over the wall. A cricketer sends a catch high into the air. A water jet from a hose arcs over a fence. Every one of them traces the same curved path. It looks complicated, yet it comes from two very simple motions happening at the same time.",
+    sections:[
+      { title:"Two Motions at Once", body:"Once something is thrown, only gravity acts on it (we ignore air for now). Gravity pulls straight down, so it changes the <strong>vertical</strong> motion only. Nothing pushes or pulls sideways, so the <strong>horizontal</strong> motion carries on at the same speed. The curved path is these two motions added together: steady drift sideways, and a fall that keeps speeding up.",
+        formula:"horizontal: constant speed     vertical: acceleration g = 9.8 m/s² downward" },
+      { title: "Splitting the Launch", body:"A throw at speed v and angle θ above the ground is really two throws at once. The horizontal part is v cos θ and the vertical part is v sin θ. A steep throw puts most of the speed into going up. A flat throw puts most of it into going forward.",
+        formula:"horizontal speed = v cos θ     vertical speed = v sin θ",
+        example:"A ball is kicked at 20 m/s at 30°. Horizontal speed: 20 × cos 30° = 17.3 m/s. Vertical speed: 20 × sin 30° = 10 m/s." },
+      { title:"Up, Top, Down", body:"Going up, gravity slows the vertical speed by 9.8 m/s every second. At the very top it reaches zero for an instant, and then the ball starts to fall. The horizontal speed never changes, so at the top the ball is still moving forward. The way down is a mirror image of the way up, so the flight time is twice the time to reach the top.",
+        formula:"time of flight = 2 v sin θ ÷ g",
+        example:"Same kick (20 m/s at 30°): time = 2 × 10 ÷ 9.8 = 2.04 s. The ball travels 17.3 × 2.04 = 35.3 m before landing." },
+      { title:"Range and Height", body:"Putting it together gives two handy formulas: how far the ball lands from you (the range), and how high it climbs.",
+        formula:"range = v² sin 2θ ÷ g     height = v² sin² θ ÷ 2g",
+        example:"For the kick above: range = 400 × sin 60° ÷ 9.8 = 35.3 m, and height = 400 × sin² 30° ÷ 19.6 = 5.1 m." },
+      { title:"The Best Angle", body:"For a given speed, the range is largest at <strong>45°</strong>. Angles that add up to 90° give the same range: 30° and 60° land at the same spot, but the 60° throw goes much higher and takes longer. In real sport air slows the ball down, so the best angle is a little lower than 45°, and a javelin or a golf shot is launched at a lower angle for that reason." }
+    ],
+    sim:{
+      type:"projectile",
+      canvasId:"projectileCanvas",
+      title:"Experiment: Launch the Ball",
+      width:700, height:360,
+      controls:[
+        { id:"chLaunchV", label:"Launch speed (m/s)", min:5, max:30, value:20 },
+        { id:"chLaunchA", label:"Launch angle (degrees)", min:5, max:85, value:30 }
+      ],
+      readout:{ id:"projectileRead", label:"Flight" },
+      note:"The dashed line is the ball's horizontal position. The ball keeps drifting at the same pace along the ground while it rises and falls."
+    },
+    gallery:{
+      type:"complementary",
+      canvasId:"complementCanvas",
+      title:"Experiment: Two Angles, One Landing Spot",
+      width:700, height:330,
+      controls:[
+        { id:"chCompA", label:"First angle (degrees). The second is 90° minus this.", min:10, max:80, value:30 }
+      ],
+      readout:{ id:"complementRead", label:"Result" },
+      note:"Launch speed is fixed at 20 m/s. A low angle and its high partner always land together, but the high one hangs in the air longer."
+    },
+    mentalPicture:[
+      "Throw a ball: gravity grabs it and pulls it down, and nothing else touches it",
+      "Sideways it coasts at one steady speed",
+      "Up and down it slows, stops at the top, then speeds up the way back",
+      "<strong>The arc is a steady sideways drift plus a fall, run together</strong>"
+    ],
+    quiz:[
+      { q:"Ignoring air, which part of a projectile's velocity stays constant?", options:[
+        {t:"The horizontal part", c:true}, {t:"The vertical part"}, {t:"Both parts"} ],
+        why:"Gravity only pulls downward. With nothing acting sideways, the horizontal speed cannot change." },
+      { q:"A ball is thrown at 30° and another at 60°, both at the same speed. How do their ranges compare?", options:[
+        {t:"The 60° ball goes further"}, {t:"They land at the same distance", c:true}, {t:"The 30° ball goes further"} ],
+        why:"Angles that add up to 90° have the same value of sin 2θ, so the range is the same. The 60° ball just goes higher." },
+      { q:"At the highest point of its flight, what is true of the ball's speed?", options:[
+        {t:"It is zero"}, {t:"It equals the horizontal part of the launch speed", c:true}, {t:"It equals the launch speed"} ],
+        why:"The vertical part is zero at the top, but the horizontal part is untouched, so the ball is still moving forward." },
+      { q:"Which launch angle gives the longest range for a given speed, with no air?", options:[
+        {t:"30°"}, {t:"45°", c:true}, {t:"60°"} ],
+        why:"The range is v² sin 2θ ÷ g, and sin 2θ is biggest (equal to 1) when 2θ = 90°, so θ = 45°." },
+      { q:"A ball is thrown so that its vertical launch speed is 14.7 m/s. How long is it in the air?", options:[
+        {t:"1.5 s"}, {t:"3 s", c:true}, {t:"4.9 s"} ],
+        why:"Time = 2 × 14.7 ÷ 9.8 = 3 s. It takes 1.5 s to reach the top and 1.5 s to come back." }
+    ]
+  },
+  {
+    id:"momentum",
+    subject:"physics",
+    pos:{ top:410, left:"78%" },
+    label:"Momentum",
+    chapter:"ATLAS ENTRY 13 • THE WEIGHT OF MOTION • GRADES 9–11",
+    title:"Momentum & Collisions",
+    hook:"A cricket ball and a tennis ball can be thrown at the same speed, but you would much rather catch the tennis ball. A slow lorry is harder to stop than a fast cycle. Speed alone does not tell the whole story. Physicists use one number that combines how heavy something is with how fast it is moving.",
+    sections:[
+      { title:"What Momentum Is", body:"<strong>Momentum</strong> is mass multiplied by velocity. A heavy object or a fast object has a lot of it, and a heavy and fast object has even more. It has a direction too, the same as the velocity. Its unit is kg·m/s.",
+        formula:"momentum p = m × v",
+        example:"A 1500 kg car at 20 m/s has p = 30,000 kg·m/s. A 60 kg cyclist at 10 m/s has p = 600 kg·m/s." },
+      { title:"Changing Momentum Needs a Force", body:"Pushing on something for some time changes its momentum. The product of the force and the time it acts is the <strong>impulse</strong>. The same change in momentum can be made with a large force for a short time, or with a small force for a long time.",
+        formula:"force × time = change in momentum",
+        example:"A cricketer catching a fast ball pulls their hands back as they catch. This makes the stopping time longer, so the force on the hands is smaller. Airbags and crumple zones do the same job for a car crash." },
+      { title:"Momentum Is Conserved", body:"In any collision or push between objects, where nothing outside is pushing, the total momentum before equals the total momentum after. Momentum can move from one object to another, but the total stays the same. This is one of the most reliable rules in all of physics.",
+        formula:"m₁v₁ + m₂v₂ (before)  =  m₁v₁′ + m₂v₂′ (after)" },
+      { title:"Sticking and Bouncing", body:"In an <strong>elastic</strong> collision the objects bounce apart and no energy is lost to heat or sound. In an <strong>inelastic</strong> one some kinetic energy is turned into heat, sound and bending. If they stick together it is perfectly inelastic. Momentum is conserved in all of them, but kinetic energy is only conserved in elastic ones.",
+        example:"A 2 kg trolley at 3 m/s hits a 1 kg trolley at rest, and they stick. Total momentum = 2 × 3 = 6. Together they weigh 3 kg, so v = 6 ÷ 3 = 2 m/s. Kinetic energy falls from 9 J to 6 J: the missing 3 J has become heat and sound." },
+      { title:"Recoil", body:"When two objects push apart from rest, their momenta are equal and opposite, because the total started at zero. The lighter one ends up moving faster. This is why a gun kicks back, why a rocket moves forward as gas shoots backward, and why a skater who pushes a heavy friend slides away faster than the friend does." }
+    ],
+    sim:{
+      type:"collision",
+      canvasId:"collisionCanvas",
+      title:"Experiment: Crash the Trolleys",
+      width:700, height:360,
+      controls:[
+        { id:"chM1", label:"Mass of the moving trolley (kg)", min:1, max:10, value:3 },
+        { id:"chM2", label:"Mass of the trolley at rest (kg)", min:1, max:10, value:3 },
+        { id:"chV1", label:"Speed of the moving trolley (m/s)", min:1, max:8, value:5 },
+        { id:"chBounce", label:"Bounciness (0 = stick together, 100 = perfectly elastic)", min:0, max:100, step:25, value:100 }
+      ],
+      readout:{ id:"collisionRead", label:"Momentum" },
+      note:"Whatever the bounciness, the total momentum before and after is identical. Only the kinetic energy changes."
+    },
+    gallery:{
+      type:"recoil",
+      canvasId:"recoilCanvas",
+      title:"Experiment: Skaters Push Apart",
+      width:700, height:300,
+      controls:[
+        { id:"chSkA", label:"Mass of the left skater (kg)", min:20, max:100, step:5, value:40 },
+        { id:"chSkB", label:"Mass of the right skater (kg)", min:20, max:100, step:5, value:80 }
+      ],
+      readout:{ id:"recoilRead", label:"After the push" },
+      note:"Both skaters get the same push for the same time, so they leave with equal and opposite momentum. The lighter one moves faster."
+    },
+    mentalPicture:[
+      "Momentum is how hard something is to stop",
+      "More mass or more speed means more momentum",
+      "In a collision it moves between objects but is never lost",
+      "<strong>The total momentum before a crash equals the total after it</strong>"
+    ],
+    quiz:[
+      { q:"Which has more momentum: a 1000 kg car at 10 m/s, or a 50 kg cyclist at 20 m/s?", options:[
+        {t:"The car", c:true}, {t:"The cyclist"}, {t:"They have the same"} ],
+        why:"Car: 1000 × 10 = 10,000. Cyclist: 50 × 20 = 1,000. The car has ten times as much." },
+      { q:"Why does pulling your hands back when you catch a fast ball hurt less?", options:[
+        {t:"It makes the ball lighter"}, {t:"It lengthens the stopping time, so the force is smaller", c:true}, {t:"It removes the ball's momentum"} ],
+        why:"The ball's momentum change is fixed. Spreading it over more time means a smaller force." },
+      { q:"A 2 kg trolley moving at 3 m/s sticks to a 1 kg trolley at rest. How fast do they move together?", options:[
+        {t:"1 m/s"}, {t:"2 m/s", c:true}, {t:"3 m/s"} ],
+        why:"Momentum before = 6 kg·m/s. After: 3 kg × v = 6, so v = 2 m/s." },
+      { q:"In which kind of collision is kinetic energy conserved?", options:[
+        {t:"Only an elastic collision", c:true}, {t:"Any collision"}, {t:"Only when objects stick together"} ],
+        why:"Momentum is conserved in every collision. Kinetic energy is only conserved when the objects bounce perfectly, with nothing lost to heat or sound." },
+      { q:"Two skaters push apart from rest. One has half the mass of the other. How do their speeds compare?", options:[
+        {t:"The lighter one moves twice as fast", c:true}, {t:"They move at the same speed"}, {t:"The heavier one moves faster"} ],
+        why:"Their momenta are equal and opposite. If one has half the mass, it needs twice the speed to match." }
+    ]
+  },
+  {
+    id:"waves",
+    subject:"physics",
+    pos:{ top:630, left:"15%" },
+    label:"Waves & Sound",
+    chapter:"ATLAS ENTRY 14 • ENERGY ON THE MOVE • GRADES 8–10",
+    title:"Waves & Sound",
+    hook:"Drop a pebble in a pond and rings spread outwards. A leaf floating there only bobs up and down; it does not travel with the ring. The pebble's energy travels across the pond, but the water mostly stays where it was. That is the secret of every wave, including the one that carries your friend's voice to your ear.",
+    sections:[
+      { title:"A Wave Carries Energy, Not Matter", body:"A wave is a disturbance that passes through something, handing its energy from one part to the next. The material itself (water, air, a rope) only wobbles about its place. If you flick one end of a rope, a ripple runs to the other end, but the rope does not move forward." },
+      { title:"Two Kinds of Wave", body:"In a <strong>transverse</strong> wave the wobble is at right angles to the direction the wave travels, like a ripple on a rope or on water, and like light. In a <strong>longitudinal</strong> wave the wobble is along the direction of travel, so the material is squeezed and stretched in turn, as in a slinky pushed back and forth, and in sound." },
+      { title:"Describing a Wave", body:"The <strong>amplitude</strong> is the biggest wobble from the middle: it tells you how much energy the wave has. The <strong>wavelength</strong> (λ) is the distance from one crest to the next. The <strong>frequency</strong> (f) is how many whole waves pass each second, measured in hertz (Hz). The <strong>period</strong> is the time for one wave, T = 1 ÷ f.",
+        formula:"period T = 1 ÷ f" },
+      { title:"The Wave Equation", body:"If f waves pass every second and each is λ metres long, then the wave advances f × λ metres every second. That is its speed. Everything else follows from this one equation. For a given material the speed is fixed, so a higher frequency means a shorter wavelength.",
+        formula:"v = f × λ",
+        example:"A wave on a rope travels at 6 m/s and has a frequency of 2 Hz. Its wavelength is λ = v ÷ f = 6 ÷ 2 = 3 m." },
+      { title:"Sound", body:"Sound is a longitudinal wave of tiny pressure changes. It needs something to travel through, so there is no sound in empty space. In air at 20 °C it goes about 343 m/s, in water about 1500 m/s, and in steel about 5000 m/s. The <strong>pitch</strong> you hear depends on the frequency, and the <strong>loudness</strong> on the amplitude. Humans hear roughly 20 Hz to 20,000 Hz.",
+        example:"A note of 440 Hz in air has a wavelength of 343 ÷ 440 = 0.78 m." },
+      { title:"Echoes", body:"Sound bounces off hard surfaces. If you shout at a distant cliff and hear the echo 2 seconds later, the sound has travelled to the cliff and back, so the one-way distance is half of speed × time. Bats and dolphins, and the sonar on ships, measure distance this way.",
+        formula:"distance = speed × time ÷ 2",
+        example:"Echo after 2 s: distance = 343 × 2 ÷ 2 = 343 m." }
+    ],
+    sim:{
+      type:"waveMaker",
+      canvasId:"waveMakerCanvas",
+      title:"Experiment: Make a Wave",
+      width:700, height:360,
+      controls:[
+        { id:"chWaveF", label:"Frequency (Hz)", min:0.5, max:4, step:0.5, value:1.5 },
+        { id:"chWaveV", label:"Wave speed (m/s)", min:2, max:8, step:0.5, value:4 },
+        { id:"chWaveA", label:"Amplitude", min:10, max:80, step:5, value:50 }
+      ],
+      readout:{ id:"waveMakerRead", label:"Wave" },
+      note:"Raise the frequency and the waves bunch up. Raise the speed and they spread out. The amplitude only changes how tall they are, not how fast they go."
+    },
+    gallery:{
+      type:"echo",
+      canvasId:"echoCanvas",
+      title:"Experiment: Time an Echo",
+      width:700, height:300,
+      controls:[
+        { id:"chEchoD", label:"Distance to the wall (metres)", min:10, max:340, step:10, value:170 }
+      ],
+      readout:{ id:"echoRead", label:"Echo" },
+      note:"The animation is slowed down. Sound at 343 m/s crosses even the longest distance here in about 1 second."
+    },
+    mentalPicture:[
+      "A pebble in a pond: the ring spreads, the water stays",
+      "Count the crests passing a point each second: that is the frequency",
+      "Measure from crest to crest: that is the wavelength",
+      "<strong>Speed = frequency × wavelength</strong>"
+    ],
+    quiz:[
+      { q:"A wave has a frequency of 5 Hz and a wavelength of 2 m. What is its speed?", options:[
+        {t:"2.5 m/s"}, {t:"7 m/s"}, {t:"10 m/s", c:true} ],
+        why:"v = f × λ = 5 × 2 = 10 m/s." },
+      { q:"What does a wave carry from place to place?", options:[
+        {t:"Energy", c:true}, {t:"Matter"}, {t:"Both, equally"} ],
+        why:"The material only wobbles about its position. The energy is what travels." },
+      { q:"Which property of a sound wave decides how loud it is?", options:[
+        {t:"Frequency"}, {t:"Amplitude", c:true}, {t:"Wavelength"} ],
+        why:"A bigger amplitude means more energy, which we hear as a louder sound. Frequency decides the pitch." },
+      { q:"Why can sound not travel through empty space?", options:[
+        {t:"It is too weak"}, {t:"There is nothing to pass the vibrations along", c:true}, {t:"Space is too cold"} ],
+        why:"Sound is a wave in a material. Where there are no particles to squeeze and stretch, it cannot travel." },
+      { q:"You shout at a cliff and hear the echo 3 seconds later (sound speed 343 m/s). How far away is the cliff?", options:[
+        {t:"About 515 m", c:true}, {t:"About 1030 m"}, {t:"About 114 m"} ],
+        why:"The sound goes there and back, so the one-way distance is 343 × 3 ÷ 2 ≈ 515 m." }
+    ]
+  },
+  {
+    id:"light",
+    subject:"physics",
+    pos:{ top:630, left:"38%" },
+    label:"Light & Refraction",
+    chapter:"ATLAS ENTRY 15 • THE BENDING OF LIGHT • GRADES 8–11",
+    title:"Reflection & Refraction",
+    hook:"Put a pencil in a glass of water and it looks broken at the surface. The pencil is fine. The light that comes from the underwater part changes direction when it leaves the water, so your eye is fooled about where that part is. Light is very fast, but it can be pushed off its straight path.",
+    sections:[
+      { title:"Light Travels in Straight Lines", body:"In one material, light goes in straight lines, which we draw as <strong>rays</strong>. That is why you get sharp shadows. Light travels incredibly fast: about 300,000 km every second in empty space. It is a little slower in air, and a lot slower in water or glass." },
+      { title:"Reflection", body:"When a ray hits a smooth surface such as a mirror, it bounces off. The angles are measured from the <strong>normal</strong>, an imaginary line at right angles to the surface. The angle at which the ray comes in is always equal to the angle at which it leaves, and both rays and the normal lie in one flat plane.",
+        formula:"angle of incidence = angle of reflection" },
+      { title:"Refraction", body:"When light goes from one clear material into another, its speed changes, and so its direction bends. Going into a slower material (air to glass), the ray bends towards the normal. Going into a faster one (glass to air) it bends away. A ray that goes along the normal is not bent at all, it just slows down." },
+      { title:"Refractive Index and Snell's Law", body:"The <strong>refractive index</strong> n of a material tells you how much it slows light: n = speed in vacuum ÷ speed in the material. Air is about 1, water 1.33, glass about 1.5, and diamond 2.42. Snell's law links the angles on the two sides.",
+        formula:"n₁ sin θ₁ = n₂ sin θ₂",
+        example:"Light goes from air into glass (n = 1.5) at 40° to the normal. sin θ₂ = sin 40° ÷ 1.5 = 0.643 ÷ 1.5 = 0.429, so θ₂ = 25.4°. The ray has bent towards the normal." },
+      { title:"Total Internal Reflection", body:"Going from a slower material to a faster one, the ray bends away from the normal. At a certain angle, the <strong>critical angle</strong>, it would travel along the surface. Beyond that, no light gets out at all and the surface acts as a perfect mirror. This is <strong>total internal reflection</strong>. It keeps light trapped inside optical fibres, which carry internet and phone signals, and it is why a cut diamond sparkles.",
+        formula:"sin(critical angle) = n₂ ÷ n₁",
+        example:"For glass to air: sin c = 1 ÷ 1.5 = 0.667, so c = 41.8°. A ray hitting the inside surface at a steeper angle than that bounces back in." }
+    ],
+    sim:{
+      type:"refraction",
+      canvasId:"refractionCanvas",
+      title:"Experiment: Bend the Ray",
+      width:700, height:380,
+      controls:[
+        { id:"chLightAngle", label:"Angle of incoming ray (degrees)", min:0, max:85, value:40 },
+        { id:"chMedium", label:"Material (1 water, 2 glass, 3 diamond)", min:1, max:3, value:2 },
+        { id:"chLightDir", label:"Direction (0 = air into material, 1 = material into air)", min:0, max:1, value:0 }
+      ],
+      readout:{ id:"refractionRead", label:"Ray" },
+      note:"Switch the direction to 1 and push the angle up. Past the critical angle the refracted ray vanishes and all of the light is reflected."
+    },
+    gallery:{
+      type:"planemirror",
+      canvasId:"mirrorCanvas",
+      title:"Experiment: The Mirror Image",
+      width:700, height:330,
+      controls:[
+        { id:"chMirrorD", label:"Distance of the candle from the mirror (cm)", min:20, max:140, step:5, value:80 }
+      ],
+      readout:{ id:"mirrorRead", label:"Image" },
+      note:"Your eye sees the rays as if they came from a candle behind the mirror, as far behind as the real one is in front."
+    },
+    mentalPicture:[
+      "A ball rolling from pavement onto sand slows down and swerves: refraction",
+      "A ball bouncing off a wall leaves at the angle it came in: reflection",
+      "Too shallow an angle, and light cannot escape the denser material at all",
+      "<strong>Light bends when its speed changes, and bounces at equal angles</strong>"
+    ],
+    quiz:[
+      { q:"A ray of light hits a mirror at 30° to the normal. At what angle does it reflect?", options:[
+        {t:"60°"}, {t:"30°", c:true}, {t:"0°"} ],
+        why:"The angle of reflection always equals the angle of incidence, both measured from the normal." },
+      { q:"Light travels from air into glass. How does it bend?", options:[
+        {t:"Towards the normal", c:true}, {t:"Away from the normal"}, {t:"It does not bend"} ],
+        why:"Glass slows light, and a ray entering a slower material bends towards the normal." },
+      { q:"What does a high refractive index tell you?", options:[
+        {t:"Light travels faster in the material"}, {t:"Light travels slower in the material, and bends more", c:true}, {t:"The material is heavier"} ],
+        why:"n = speed in vacuum ÷ speed in the material. A bigger n means a slower speed and a greater bend." },
+      { q:"What is needed for total internal reflection?", options:[
+        {t:"Light going from a slower material to a faster one, at more than the critical angle", c:true}, {t:"Light going from air into water"}, {t:"A rough surface"} ],
+        why:"Only light that is trying to leave a denser material can be trapped, and only if the angle is bigger than the critical angle." },
+      { q:"A pencil in water looks bent. What causes this?", options:[
+        {t:"The water bends the pencil"}, {t:"Refraction of the light as it leaves the water", c:true}, {t:"Reflection from the glass"} ],
+        why:"Light from the underwater part bends as it comes out, so it seems to come from a different place." }
+    ]
+  },
+  {
+    id:"lenses",
+    subject:"physics",
+    pos:{ top:630, left:"61%" },
+    label:"Lenses",
+    chapter:"ATLAS ENTRY 16 • MAKING PICTURES FROM LIGHT • GRADES 9–11",
+    title:"Lenses & Images",
+    hook:"Your eye, a camera, a telescope and a magnifying glass all do one thing: they gather light and bend it to make a picture. The picture on the back of your eye is upside down, and your brain turns it the right way up without you noticing. The tool for all of this is a curved piece of glass.",
+    sections:[
+      { title:"The Convex Lens", body:"A <strong>convex</strong> lens is thicker in the middle. Rays that come in parallel to its axis are bent so that they all meet at one point on the other side, the <strong>focus</strong> (F). The distance from the lens to the focus is the <strong>focal length</strong> f. A thicker, more curved lens bends light more and has a shorter focal length." },
+      { title:"Drawing Two Rays", body:"To find where an image forms, draw two rays from the top of the object. A ray parallel to the axis bends through the focus on the far side. A ray through the exact middle of the lens goes straight on. Where the two rays meet is the top of the image. Everything else about the image follows from that point." },
+      { title:"Real and Virtual Images", body:"If the object is further away than the focal length, the rays really do meet on the far side, and you get a <strong>real image</strong> that can be caught on a screen. It is upside down. If the object is closer than the focal length, the rays spread out and never meet. Your eye traces them back and sees an upright, enlarged <strong>virtual image</strong> on the same side as the object. This is how a magnifying glass works." },
+      { title:"The Lens Equation", body:"Instead of drawing, you can calculate. With u as the distance from lens to object and v from lens to image, the lens equation links them with the focal length. The <strong>magnification</strong> tells you how big the image is compared with the object. A negative sign means the image is upside down.",
+        formula:"1/f = 1/u + 1/v      magnification = −v ÷ u",
+        example:"f = 10 cm, object at u = 30 cm. 1/v = 1/10 − 1/30 = 2/30, so v = 15 cm. Magnification = −15 ÷ 30 = −0.5: a real, upside-down image, half the size." },
+      { title:"Cameras, Eyes and Glasses", body:"A camera or eye lens makes a real, small, upside-down image of a faraway scene on the sensor or retina. To focus on nearer things, the camera moves the lens, and the eye changes the shape of its lens. A short-sighted person's eye focuses too far in front of the retina, and a concave lens in glasses spreads the light a little first to fix this. A long-sighted person needs a convex lens." }
+    ],
+    sim:{
+      type:"lensRays",
+      canvasId:"lensCanvas",
+      title:"Experiment: Where Does the Image Form?",
+      width:700, height:380,
+      controls:[
+        { id:"chFocal", label:"Focal length (cm)", min:5, max:15, step:0.5, value:10 },
+        { id:"chObjDist", label:"Distance of the object from the lens (cm)", min:3, max:40, step:0.5, value:25 }
+      ],
+      readout:{ id:"lensRead", label:"Image" },
+      note:"Move the object inside the focal length and the image jumps to the object's side: upright, bigger and virtual. Put it exactly on the focus and no image forms at all."
+    },
+    mentalPicture:[
+      "A convex lens drags all parallel rays to one focus",
+      "Two easy rays are enough to find any image",
+      "Outside the focus: real, upside down. Inside the focus: virtual, upright, bigger",
+      "<strong>1/f = 1/u + 1/v gives the image distance, and −v/u gives its size</strong>"
+    ],
+    quiz:[
+      { q:"What does a convex lens do to parallel rays?", options:[
+        {t:"Spreads them apart"}, {t:"Brings them together at the focus", c:true}, {t:"Leaves them unchanged"} ],
+        why:"Convex lenses converge light. Concave lenses are the ones that spread it out." },
+      { q:"An object is placed at 30 cm from a lens of focal length 10 cm. Where is the image?", options:[
+        {t:"15 cm from the lens", c:true}, {t:"20 cm from the lens"}, {t:"30 cm from the lens"} ],
+        why:"1/v = 1/10 − 1/30 = 2/30, so v = 15 cm." },
+      { q:"A magnifying glass shows an upright, bigger image. Where is the object?", options:[
+        {t:"Closer to the lens than the focal length", c:true}, {t:"Further than twice the focal length"}, {t:"Exactly at the focus"} ],
+        why:"Inside the focal length the rays do not meet, and you see an upright, enlarged virtual image." },
+      { q:"The magnification of an image is −0.5. What does that tell you?", options:[
+        {t:"Upright and half the size"}, {t:"Upside down and half the size", c:true}, {t:"Upside down and twice the size"} ],
+        why:"The size is 0.5 times the object. The minus sign means the image is upside down." },
+      { q:"A camera makes a real image on its sensor. Which is true of that image?", options:[
+        {t:"It is upside down", c:true}, {t:"It is upright"}, {t:"It is virtual"} ],
+        why:"A real image from a convex lens is always upside down. The camera just displays it the right way up." }
+    ]
+  },
+  {
+    id:"heat",
+    subject:"physics",
+    pos:{ top:850, left:"28%" },
+    label:"Heat",
+    chapter:"ATLAS ENTRY 17 • WHERE THE WARMTH GOES • GRADES 8–10",
+    title:"Heat & Temperature",
+    hook:"A bathtub of lukewarm water holds far more heat than a cup of boiling tea. And yet the tea is hotter. Heat and temperature sound like one thing, but physics keeps them apart. Once you separate them, it is easy to see why a metal chair feels colder than a wooden one in the same room.",
+    sections:[
+      { title:"Temperature Is Not Heat", body:"<strong>Temperature</strong> tells you how fast the particles in something are moving on average. <strong>Heat</strong> is the energy that moves from a hotter thing to a colder thing because of that difference. The bath has a low temperature but a huge number of particles, so it holds a lot of energy. The tea has a high temperature but few particles, so it holds less." },
+      { title:"Heat Always Flows Downhill", body:"Heat only moves from hotter to colder, never the other way by itself. A hot cup warms your hands because energy flows from the cup into them. Ice cools a drink because energy flows from the drink into the ice. We say the ice is “cold” only because it takes energy away." },
+      { title:"Specific Heat Capacity", body:"Different materials need different amounts of energy to warm up. The <strong>specific heat capacity</strong> c is the energy needed to raise 1 kg of the material by 1 °C. Water needs a lot: 4180 J. Iron needs only 450 J. That is why sand on a beach gets hot while the sea beside it stays cool.",
+        formula:"Q = m × c × ΔT",
+        example:"Heating 2 kg of water by 30 °C needs Q = 2 × 4180 × 30 = 250,800 J, about 251 kJ. A 1 kW heater supplies 1000 J every second, so it takes about 251 s." },
+      { title:"Three Ways Heat Travels", body:"In <strong>conduction</strong>, particles pass energy to their neighbours without travelling themselves. Metals are the best conductors, because they also have free electrons. In <strong>convection</strong>, a warm liquid or gas expands, becomes less dense and rises, and cooler fluid sinks to take its place. This sets up a circulating current. In <strong>radiation</strong>, energy travels as infrared waves, with no material needed. This is how the Sun warms the Earth." },
+      { title:"Putting It to Use", body:"A metal spoon in hot soup gets hot by conduction, but a wooden spoon does not, since wood is an insulator. A radiator warms a room mainly by convection. A vacuum flask has a gap with nothing in it to stop conduction and convection, and a shiny wall to reflect radiation. Wearing white in summer reflects radiation, and layers of wool trap still air, which is a poor conductor." }
+    ],
+    sim:{
+      type:"heater",
+      canvasId:"heaterCanvas",
+      title:"Experiment: Heat Something Up",
+      width:700, height:380,
+      controls:[
+        { id:"chHeatMat", label:"Material (1 water, 2 cooking oil, 3 aluminium, 4 iron)", min:1, max:4, value:1 },
+        { id:"chHeatMass", label:"Mass (kg)", min:0.2, max:2, step:0.1, value:1 },
+        { id:"chHeatPower", label:"Heater power (watts)", min:200, max:2000, step:100, value:1000 },
+        { id:"chHeatTime", label:"Time switched on (seconds)", min:0, max:300, step:10, value:120 }
+      ],
+      readout:{ id:"heaterRead", label:"Result" },
+      note:"Every sample starts at 20 °C. Compare water with iron for the same mass and power: iron heats about nine times faster."
+    },
+    gallery:{
+      type:"heatflow",
+      canvasId:"heatFlowCanvas",
+      title:"Experiment: Three Ways Heat Travels",
+      width:700, height:340,
+      controls:[
+        { id:"chFlowMode", label:"Mode (1 conduction, 2 convection, 3 radiation)", min:1, max:3, value:1 }
+      ],
+      readout:{ id:"heatFlowRead", label:"Mode" },
+      note:"Each picture is slowed down. Watch what actually moves in each case: nothing, a current of fluid, or waves."
+    },
+    mentalPicture:[
+      "Temperature: how fast the particles dance",
+      "Heat: the energy that flows from the faster dancers to the slower ones",
+      "Water needs a lot of energy for every degree; iron needs very little",
+      "<strong>Heat flows by conduction, convection or radiation, always from hot to cold</strong>"
+    ],
+    quiz:[
+      { q:"Which statement is correct?", options:[
+        {t:"A bath of warm water can hold more heat than a cup of boiling tea", c:true}, {t:"Heat and temperature mean the same thing"}, {t:"Boiling tea always holds more heat than any bath"} ],
+        why:"Heat depends on the number of particles as well as their speed. The bath has far more particles." },
+      { q:"How much energy is needed to raise 2 kg of water by 10 °C (c = 4180 J/kg°C)?", options:[
+        {t:"41,800 J"}, {t:"83,600 J", c:true}, {t:"20,900 J"} ],
+        why:"Q = m c ΔT = 2 × 4180 × 10 = 83,600 J." },
+      { q:"Which is mainly a convection effect?", options:[
+        {t:"Warm air rising above a radiator", c:true}, {t:"A metal spoon getting hot in soup"}, {t:"Sunlight warming your face"} ],
+        why:"Convection is the movement of heated fluid. The spoon is conduction and the sunlight is radiation." },
+      { q:"Why does the sand on a beach get hot while the sea stays cooler?", options:[
+        {t:"Sand has a much lower specific heat capacity than water", c:true}, {t:"The Sun only shines on the sand"}, {t:"Water does not absorb any heat"} ],
+        why:"A little energy raises sand's temperature a lot. Water needs a great deal more for each degree." },
+      { q:"Which of these needs no material at all to carry heat?", options:[
+        {t:"Conduction"}, {t:"Convection"}, {t:"Radiation", c:true} ],
+        why:"Radiation travels as electromagnetic waves, so it can cross empty space. That is how the Sun's heat reaches us." }
+    ]
+  },
+  {
+    id:"pressure",
+    subject:"physics",
+    pos:{ top:850, left:"60%" },
+    label:"Pressure & Floating",
+    chapter:"ATLAS ENTRY 18 • THE PUSH FROM EVERYWHERE • GRADES 8–11",
+    title:"Pressure & Buoyancy",
+    hook:"A person can lie safely on a bed of nails, and a woman in stiletto heels can leave dents in a wooden floor that an elephant would not. The force is nearly the same in each case. What changes is the area it is spread over. And the same idea explains why divers feel their ears squeezed, and why a steel ship floats.",
+    sections:[
+      { title:"Pressure Is Force Over Area", body:"<strong>Pressure</strong> is how much force presses on each square metre. Push the same force on a small area and the pressure is large; spread it over a big area and the pressure is small. Its unit is the pascal (Pa), which is one newton on one square metre.",
+        formula:"pressure = force ÷ area",
+        example:"A 600 N person stands on both feet (0.03 m² in contact): P = 600 ÷ 0.03 = 20,000 Pa = 20 kPa. On one stiletto heel (0.0001 m²): P = 600 ÷ 0.0001 = 6,000,000 Pa. That is 300 times greater." },
+      { title:"Sharp and Wide", body:"Knives, nails and needles have tiny tips so that the pressure is huge and they cut or pierce. Skis, snowshoes, tank tracks and camel feet are wide so that the pressure is small and they do not sink. On a bed of nails there are hundreds of points, so the weight is shared, and each nail takes a gentle pressure." },
+      { title:"Pressure in a Liquid", body:"A liquid presses on everything in it, in every direction. The deeper you go, the more liquid is above you, so the pressure grows. It depends only on the depth and the density of the liquid, not on the shape of the container. Add the pressure of the air above (about 101 kPa) for the total.",
+        formula:"liquid pressure = ρ × g × h",
+        example:"At 10 m deep in water: P = 1000 × 9.8 × 10 = 98,000 Pa ≈ 98 kPa. With the atmosphere's 101 kPa, the total is about 199 kPa, nearly 2 atmospheres." },
+      { title:"Upthrust", body:"Because pressure grows with depth, the water pushes up on the bottom of a submerged object harder than it pushes down on the top. The difference is a net upward force: the <strong>upthrust</strong> (buoyant force). Archimedes found that it equals the weight of the fluid the object pushes aside.",
+        formula:"upthrust = weight of fluid displaced = ρ(fluid) × V × g" },
+      { title:"Sink or Float", body:"An object floats if its average density is less than the fluid's. A wooden block (500 kg/m³) floats in water (1000 kg/m³) with half of it below the surface. An iron block (7870 kg/m³) sinks in water, yet floats in mercury (13,600 kg/m³). A steel ship floats because it is mostly air inside, so its <em>average</em> density, steel and air together, is lower than water's." }
+    ],
+    sim:{
+      type:"diver",
+      canvasId:"diverCanvas",
+      title:"Experiment: Dive Deeper",
+      width:700, height:380,
+      controls:[
+        { id:"chDepth", label:"Depth (metres)", min:0, max:60, step:1, value:20 },
+        { id:"chFluidDen", label:"Density of the liquid (kg/m³). Water is 1000.", min:800, max:1400, step:25, value:1000 }
+      ],
+      readout:{ id:"diverRead", label:"Pressure" },
+      note:"The pressure grows in a straight line with depth. A denser liquid, such as salt water at 1025, presses a little harder at the same depth."
+    },
+    gallery:{
+      type:"sinkfloat",
+      canvasId:"floatCanvas",
+      title:"Experiment: Sink or Float?",
+      width:700, height:360,
+      controls:[
+        { id:"chObjDen", label:"Density of the block (kg/m³)", min:200, max:9000, step:100, value:500 },
+        { id:"chLiquid", label:"Liquid (1 oil, 2 water, 3 salt water, 4 mercury)", min:1, max:4, value:2 }
+      ],
+      readout:{ id:"floatRead", label:"Result" },
+      note:"Try 7800 (iron) in water, then in mercury. The block floats exactly when it is less dense than the liquid."
+    },
+    mentalPicture:[
+      "Same force, small area: huge pressure. Same force, big area: gentle pressure",
+      "Deeper means more water above, so more pressure",
+      "Below the surface, the water pushes up harder underneath than down on top",
+      "<strong>Less dense than the liquid floats; denser sinks</strong>"
+    ],
+    quiz:[
+      { q:"A force of 200 N acts on an area of 0.5 m². What is the pressure?", options:[
+        {t:"100 Pa"}, {t:"400 Pa", c:true}, {t:"0.0025 Pa"} ],
+        why:"Pressure = force ÷ area = 200 ÷ 0.5 = 400 Pa." },
+      { q:"Why does a sharp knife cut better than a blunt one with the same force?", options:[
+        {t:"The force spreads over a smaller area, so the pressure is greater", c:true}, {t:"Sharp knives are heavier"}, {t:"Blunt knives have less friction"} ],
+        why:"A thin edge puts the same force on a tiny area, which gives a huge pressure." },
+      { q:"What happens to the pressure in water as you go deeper?", options:[
+        {t:"It increases", c:true}, {t:"It decreases"}, {t:"It stays the same"} ],
+        why:"There is more liquid above you, and liquid pressure = ρ g h grows with the depth h." },
+      { q:"A block of density 600 kg/m³ is put in water (1000 kg/m³). What happens?", options:[
+        {t:"It floats with 60% below the surface", c:true}, {t:"It sinks"}, {t:"It floats with 40% below the surface"} ],
+        why:"The fraction below the surface equals the density ratio: 600 ÷ 1000 = 0.6." },
+      { q:"A steel ship floats even though steel is far denser than water. Why?", options:[
+        {t:"The ship's average density, with all the air inside, is less than water's", c:true}, {t:"Steel gets lighter at sea"}, {t:"Water pushes up on steel harder than on other things"} ],
+        why:"Upthrust depends on the volume of water displaced. A hollow hull displaces a lot, and weighs a little for its size." }
+    ]
+  },
+  {
+    id:"magnetism",
+    subject:"physics",
+    pos:{ top:1070, left:"15%" },
+    label:"Magnetism",
+    chapter:"ATLAS ENTRY 19 • THE FIELD YOU CANNOT SEE • GRADES 8–11",
+    title:"Magnetism & Electromagnets",
+    hook:"A compass needle points north wherever you stand, without anyone touching it. In 1820 a Danish teacher named Hans Christian Ørsted was showing a class an electric current when he noticed that the needle of a nearby compass twitched. Electricity and magnetism turned out to be two faces of one thing, and nearly all of our power stations and motors depend on that.",
+    sections:[
+      { title:"Poles and Forces", body:"Every magnet has two ends called poles, a north-seeking pole (N) and a south-seeking pole (S). <strong>Opposite poles attract; like poles repel.</strong> If you cut a magnet in half, you do not get a lone north and a lone south: each piece has both poles again. Only iron, nickel, cobalt and a few alloys are strongly attracted to magnets." },
+      { title:"The Magnetic Field", body:"A magnet affects the space around it. This region is its <strong>magnetic field</strong>, and we draw it with field lines. Outside the magnet the lines run from N to S. Where they are close together the field is strong. A compass needle lines up along the field lines, which is how it finds north: the Earth itself is a giant magnet with a field running through it." },
+      { title:"Electricity Makes Magnetism", body:"Any electric current has a magnetic field around it. Wind the wire into a coil, and the fields of all the loops add up and look like the field of a bar magnet. This is an <strong>electromagnet</strong>, and the great advantage is that you can turn it on and off." },
+      { title:"Making It Stronger", body:"Three things strengthen an electromagnet: more turns of wire, more current, and a soft iron core inside the coil. The iron becomes a magnet itself while the current flows, and makes the whole thing many times stronger. When the current is switched off, the iron core loses almost all of its magnetism.",
+        formula:"strength grows with (number of turns × current), and a lot more with an iron core",
+        example:"A coil of 10 turns carrying 2 A has 20 “ampere-turns”. Double both the turns and the current and you get 4 times as many, so about 4 times the strength." },
+      { title:"Putting It to Work", body:"A scrapyard crane uses a huge electromagnet to lift cars, and drops them when the current is cut. Doorbells, relays and loudspeakers all contain electromagnets. In an electric motor a magnet pushes on a current-carrying coil to make it turn. The reverse also works: spin a coil near a magnet and a voltage appears. That is a <strong>generator</strong>, and it is how most of the world's electricity is made." }
+    ],
+    sim:{
+      type:"electromagnet",
+      canvasId:"electromagnetCanvas",
+      title:"Experiment: Build an Electromagnet",
+      width:700, height:380,
+      controls:[
+        { id:"chTurns", label:"Turns of wire", min:1, max:20, value:8 },
+        { id:"chCurrent", label:"Current (amps)", min:0, max:5, step:0.5, value:2 },
+        { id:"chCore", label:"Iron core (0 = none, 1 = inside the coil)", min:0, max:1, value:1 }
+      ],
+      readout:{ id:"electromagnetRead", label:"Lifting power" },
+      note:"Every paper clip the magnet can hold up is one it can carry. Switch the current to 0 and they all drop."
+    },
+    gallery:{
+      type:"twomagnets",
+      canvasId:"twoMagnetsCanvas",
+      title:"Experiment: Two Bar Magnets",
+      width:700, height:300,
+      controls:[
+        { id:"chMagGap", label:"Gap between the magnets (cm)", min:1, max:10, step:0.5, value:4 },
+        { id:"chMagFlip", label:"Right magnet (0 = turned so S faces the left magnet, 1 = turned round)", min:0, max:1, value:0 }
+      ],
+      readout:{ id:"twoMagnetsRead", label:"Force" },
+      note:"The force falls away very fast as the gap grows: double the gap and it drops to about one eighth."
+    },
+    mentalPicture:[
+      "Opposite poles hug each other, like poles shove each other away",
+      "A current wrapped into a coil turns into a magnet you can switch off",
+      "More turns, more current, an iron core: stronger",
+      "<strong>Electricity makes magnetism, and moving magnets make electricity</strong>"
+    ],
+    quiz:[
+      { q:"Two magnets are brought together with their north poles facing each other. What happens?", options:[
+        {t:"They attract"}, {t:"They repel", c:true}, {t:"Nothing happens"} ],
+        why:"Like poles repel. Opposite poles attract." },
+      { q:"You cut a bar magnet in half. What do you get?", options:[
+        {t:"One north piece and one south piece"}, {t:"Two smaller magnets, each with a north and south pole", c:true}, {t:"Two pieces with no magnetism"} ],
+        why:"Poles always come in pairs. Cutting a magnet makes two complete magnets." },
+      { q:"Which change does NOT make an electromagnet stronger?", options:[
+        {t:"Adding more turns of wire"}, {t:"Increasing the current"}, {t:"Removing the iron core", c:true} ],
+        why:"A soft iron core makes the field many times stronger. Taking it out weakens the magnet." },
+      { q:"Why is an electromagnet useful for a scrapyard crane?", options:[
+        {t:"It can be switched off to drop the load", c:true}, {t:"It is always weaker than a normal magnet"}, {t:"It does not need electricity"} ],
+        why:"Cutting the current removes the field, so the crane lets go of the car when it wants to." },
+      { q:"What does a generator do?", options:[
+        {t:"Turns a spinning coil in a magnetic field into electricity", c:true}, {t:"Turns electricity into movement"}, {t:"Stores magnetism"} ],
+        why:"Moving a coil through a magnetic field creates a voltage. A motor does the opposite job." }
+    ]
+  }
+);

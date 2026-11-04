@@ -5,7 +5,7 @@ SUBJECTS.forEach(s=>{ const tab=document.createElement("button"); tab.className=
 
 const ACCENT_VAR={ physics:"--physics", mathematics:"--math", india:"--india", chemistry:"--chemistry" };
 const CONSTELLATION_GROUPS={
-  physics:[{ name:"The Mechanics Cluster", ids:["gravity","motion","forces","energy"] },{ name:"The Circuits Cluster", ids:["electricity","electronics"] }],
+  physics:[{ name:"The Mechanics Cluster", ids:["gravity","motion","forces","energy","projectile","momentum"] },{ name:"Waves & Light", ids:["waves","light","lenses"] },{ name:"Heat & Matter", ids:["heat","pressure"] },{ name:"The Circuits Cluster", ids:["magnetism","electricity","electronics"] }],
   mathematics:[{ name:"Number Sense", ids:["primes","fractions","ratio-percent","number-system","exponents"] },{ name:"Algebra & Change", ids:["algebra","linear-graphs","quadratics","sequences","calculus"] },{ name:"Shapes & Space", ids:["geometry","trigonometry"], dx:70 },{ name:"Data & Chance", ids:["probability","statistics"] }],
   chemistry:[{ name:"Matter & Atoms", ids:["matter-states","atoms","periodic-table"] },{ name:"Bonds & Reactions", ids:["bonding","reactions","acids-bases"] },{ name:"Amounts & Energy", ids:["mole","gas-laws","energy-rates"] },{ name:"Carbon", ids:["organic"] }],
   india:[{ name:"The Land & Sky", ids:["physical-features","rivers","monsoon"] },{ name:"Ancient India", ids:["indus-valley","empires","tamilakam"] },{ name:"Modern India", ids:["freedom-struggle","republic-india"] }]
@@ -27,7 +27,7 @@ function switchSubject(id){
 const atlas=document.getElementById("atlas");
 let ATLAS_POS={};
 function atlasNodeSize(){ const w=window.innerWidth; return w<=520?78:(w<=900?96:130); }
-const STACK_ON_NARROW={ mathematics:true, chemistry:true };
+const STACK_ON_NARROW={ physics:true, mathematics:true, chemistry:true };
 function computeAtlasLayout(subjectLessons, atlasW){
   const size=atlasNodeSize(); ATLAS_POS={};
   const tops=subjectLessons.filter(l=>!l.orbit);

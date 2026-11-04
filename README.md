@@ -6,7 +6,7 @@ MindSky is a free interactive learning site for students in Grades 6 to 12. Each
 
 ## Subjects
 
-- **Physics:** gravity, motion, forces, energy, electricity and electronics
+- **Physics:** 14 topics: gravity, motion, forces, energy, projectiles, momentum, waves and sound, light, lenses, heat, pressure, magnetism, electricity and electronics
 - **Mathematics:** 17 topics, from primes and fractions to trigonometry and calculus
 - **Chemistry:** atoms, the periodic table, bonding, reactions, acids and bases, the mole, gas laws, energy and rates, and carbon chemistry
 - **Indian Geography & History:** physical features, rivers, the monsoon, the Indus Valley, empires, Tamilakam, the freedom struggle and the Republic

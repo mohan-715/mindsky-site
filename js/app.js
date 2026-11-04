@@ -176,6 +176,7 @@ function renderLab(){
       <button class="lab-tab" data-lab="pwm">PWM</button>
       <button class="lab-tab" data-lab="buzzer">Buzzer</button>
       </div></div>
+      <div class="lab-group"><div class="lab-group-label">MORE PHYSICS</div><div class="lab-group-row">${BENCH.filter(x=>x.group==='phys').map(benchTab).join('')}</div></div>
       <div class="lab-group"><div class="lab-group-label">CHEMISTRY</div><div class="lab-group-row">${BENCH.filter(x=>x.group==='chem').map(benchTab).join('')}</div></div>
       <div class="lab-group"><div class="lab-group-label">MATHS</div><div class="lab-group-row">${BENCH.filter(x=>x.group==='math').map(benchTab).join('')}</div></div>
     </div>
