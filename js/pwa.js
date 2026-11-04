@@ -1,13 +1,2 @@
-/* ---------- INSTALL + OFFLINE ---------- */
-(function(){
-  if("serviceWorker" in navigator && (location.protocol==="https:"||location.hostname==="localhost"||location.hostname==="127.0.0.1")){
-    window.addEventListener("load",function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); });
-  }
-  let deferred=null;
-  window.addEventListener("beforeinstallprompt",function(e){ e.preventDefault(); deferred=e; const b=document.getElementById("installBtn"); if(b) b.hidden=false; });
-  window.addEventListener("appinstalled",function(){ deferred=null; const b=document.getElementById("installBtn"); if(b) b.hidden=true; showToast("MindSky installed"); });
-  document.addEventListener("click",function(e){
-    if(e.target && e.target.id==="installBtn" && deferred){ deferred.prompt(); deferred.userChoice.finally(function(){ deferred=null; e.target.hidden=true; }); }
-  });
-  window.addEventListener("hashchange",function(){ const b=document.getElementById("installBtn"); if(b && deferred) b.hidden=false; });
-})();
+/*! MindSky (c) 2026 Mohan. All rights reserved. Copying or republishing is not permitted without written permission. */
+!function(){!("serviceWorker"in navigator)||"https:"!==location.protocol&&"localhost"!==location.hostname&&"127.0.0.1"!==location.hostname||window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});let n=null;window.addEventListener("beforeinstallprompt",function(t){t.preventDefault(),n=t;const e=document.getElementById("installBtn");e&&(e.hidden=!1)}),window.addEventListener("appinstalled",function(){n=null;const t=document.getElementById("installBtn");t&&(t.hidden=!0),showToast("MindSky installed")}),document.addEventListener("click",function(t){t.target&&"installBtn"===t.target.id&&n&&(n.prompt(),n.userChoice.finally(function(){n=null,t.target.hidden=!0}))}),window.addEventListener("hashchange",function(){const t=document.getElementById("installBtn");t&&n&&(t.hidden=!1)})}();
