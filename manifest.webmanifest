@@ -2,6 +2,8 @@
   "name": "MindSky",
   "short_name": "MindSky",
   "description": "Interactive lessons in Physics, Maths, Chemistry, Biology and Indian Geography & History for Grades 6 to 12.",
+  "id": "./",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
