@@ -11,6 +11,7 @@ MindSky is a free interactive learning site for students in Grades 6 to 12. Each
 - **Chemistry:** atoms, the periodic table, bonding, reactions, acids and bases, the mole, gas laws, energy and rates, and carbon chemistry
 - **Digital logic:** a Logic Circuit Builder in the Lab for wiring gates, switches, lamps and a clock, with examples from adders and multiplexers to latches and flip-flops, plus an automatic truth table
 - **Computer Science:** bits and binary, logic gates, images as pixels, loops and conditions, sorting, searching, how fast algorithms grow, recursion, secret codes, and how the internet moves a message
+- **Embedded Systems (the asteroid):** microprocessor vs microcontroller, Arduino sketches, ESP32 and Wi-Fi, digital pins and pull-ups, PWM and servos, analog input and ADC, UART and I²C, interrupts and timers, battery life.
 - **Biology:** cells, diffusion and osmosis, enzymes, photosynthesis, the heart and blood, genetics, DNA and proteins, natural selection, food chains and energy, and population cycles
 - **Indian Geography & History:** physical features, rivers, the monsoon, the Indus Valley, empires, Tamilakam, the freedom struggle and the Republic
 
